@@ -21,6 +21,6 @@ func (self *HttpServer) SetupLogger(logger *slog.Logger) {
 }
 
 func (self *HttpServer) Start(addr string) error {
-	self.logger.Info("Server started on ", addr)
+	self.logger.Info("Server started on %s", addr)
 	return self.route.Run(addr)
 }
