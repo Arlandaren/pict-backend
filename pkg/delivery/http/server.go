@@ -15,7 +15,12 @@ type HttpServer struct {
 }
 
 func (self *HttpServer) RouteAll() {
+	self.route = gin.Default()
 	router.RouteAPI(self.route, self.database)
+}
+
+func (self *HttpServer) SetupDB(db *database.Database) {
+	self.database = db
 }
 
 func (self *HttpServer) SetupLogger(logger *slog.Logger) {
@@ -23,6 +28,7 @@ func (self *HttpServer) SetupLogger(logger *slog.Logger) {
 }
 
 func (self *HttpServer) Start(addr string) error {
+
 	self.logger.Info("Server started on %s", addr)
 	return self.route.Run(addr)
 }
