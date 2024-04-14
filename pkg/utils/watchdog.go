@@ -4,6 +4,7 @@ import (
 	"course-backend/pkg/database"
 	"fmt"
 	"math/rand"
+	"strconv"
 	"time"
 )
 
@@ -18,10 +19,10 @@ func convertStepikCourseToCourse(stepikCourse StepikCourse_) database.Course {
 	return database.Course{
 		ID:          stepikCourse.Id,
 		Title:       stepikCourse.Title,
-		Description: stepikCourse.Summary,                 // Assuming the summary is the description
-		Link:        stepikCourse.Cover,                   // Assuming the cover is the link
-		Complexity:  rand.Intn(5) + 1,                     // Assuming the review summary is the complexity
-		Cost:        priceList[rand.Intn(len(priceList))], // Assuming the learners count is the cost
+		Description: stepikCourse.Summary,                                         // Assuming the summary is the description
+		Link:        "https://stepik.org/course/" + strconv.Itoa(stepikCourse.Id), // Assuming the cover is the link
+		Complexity:  rand.Intn(5) + 1,                                             // Assuming the review summary is the complexity
+		Cost:        priceList[rand.Intn(len(priceList))],                         // Assuming the learners count is the cost
 		Rating:      rateList[rand.Intn(len(rateList))],
 	}
 }
