@@ -1,11 +1,23 @@
 package router
 
-import "github.com/gin-gonic/gin"
+import (
+	"course-backend/pkg/database"
+	db_middleware "course-backend/pkg/middleware/db"
 
-func RouteAPI(r *gin.Engine) {
-	_ = r.Group("/api")
+	"github.com/gin-gonic/gin"
+)
+
+func RouteAPI(r *gin.Engine, db *database.Database) {
+	root := r.Group("/api")
+
+	root.Use(db_middleware.HandleBuilder(db))
 	{
-		// Coming soon
+
+		couser_methods := root.Group("courses")
+		{
+			couser_methods.GET("/list/:page")
+		}
+
 	}
 
 }

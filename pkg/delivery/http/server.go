@@ -1,6 +1,7 @@
 package http_server
 
 import (
+	"course-backend/pkg/database"
 	"course-backend/pkg/router"
 	"log/slog"
 
@@ -8,12 +9,13 @@ import (
 )
 
 type HttpServer struct {
-	route  *gin.Engine
-	logger *slog.Logger
+	route    *gin.Engine
+	logger   *slog.Logger
+	database *database.Database
 }
 
 func (self *HttpServer) RouteAll() {
-	router.RouteAPI(self.route)
+	router.RouteAPI(self.route, self.database)
 }
 
 func (self *HttpServer) SetupLogger(logger *slog.Logger) {
